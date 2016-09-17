@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "inlineSourceMap": true,
+    "outDir": "../out/js/",
+    "target": "es6",
+    "jsx": "react",
+    "experimentalDecorators": true
+  }
+}
