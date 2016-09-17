@@ -15,12 +15,14 @@ function selectProps(state: IState): IDispatchProps {
   return {
     facets: state.ontology.facets,
     errors: state.todos.createErrors,
+    shouldShow: state.isCreating,
   };
 }
 
 interface IDispatchProps {
   facets: IFacet[];
   errors: string[];
+  shouldShow: boolean;
 }
 
 interface IActionProps {
@@ -32,7 +34,10 @@ interface IActionProps {
 export class CreateModal extends React.Component<IDispatchProps & IActionProps, {}> {
 
   render() {
-    console.log(this.props);
+    if (!this.props.shouldShow) {
+      return null;  
+    }
+
     return (
       <Modal>
         <button onClick={this.props.closeModal}>close</button>

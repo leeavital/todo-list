@@ -1,21 +1,21 @@
 import * as React from "react";
+import { Container } from "muicss/react";
 
 export class Modal extends React.Component<{}, {}> {
 
   private style = {
-    position: "absolute",
-    margin: "40px",
-    width: "calc(100% - 120px)",
-    height: "calc(100% - 120px)",
-    backgroundColor: "gray",
-    top: 0,
-    padding: "20px",
+    width: '400px',
+    height: '300px',
+    margin: '100px auto',
+    backgroundColor: '#fff',
   };
 
   render() {
     return (
       <div style={this.style}>
-        {this.props.children}
+        <Container>
+          {this.props.children}
+        </Container>
       </div>
     );
   }

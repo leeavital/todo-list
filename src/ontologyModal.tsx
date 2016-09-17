@@ -7,6 +7,7 @@ import { IFacet} from "./ontology";
 
 interface IOntologyModalDispatchProps {
   facets: IFacet[];
+  shouldShow: boolean;
 }
 
 interface IOntologyModalActionProps {
@@ -24,6 +25,7 @@ const actions = {
 function selectProps(state: IState): IOntologyModalDispatchProps {
   return {
     facets: state.ontology.facets,  
+    shouldShow: state.ontology.isEditing
   }
 }
 
@@ -31,6 +33,11 @@ function selectProps(state: IState): IOntologyModalDispatchProps {
 export class OntologyModal extends React.Component<IOntologyModalDispatchProps & IOntologyModalActionProps, {}> {
 
   render() {
+
+    if (!this.props.shouldShow) {
+      return null;  
+    }
+
     let items = this.props.facets.map(fac => {
         return (<li key={fac.id}>
           {fac.name} <button onClick={() => this.props.removeFacet(fac.id)}>remove</button>

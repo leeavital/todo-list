@@ -9,6 +9,8 @@ import { CreateModal } from "./createModal";
 import { OntologyModal } from "./ontologyModal";
 import { openOntologyEditor } from "./ontologyActions";
 
+import { overlay } from "muicss";
+
 export interface IAppProps {
   todosCount?: number;
   isCreating?: boolean;
@@ -40,7 +42,7 @@ export class App extends React.Component<IAppProps, {}> {
 
         <Panel>
           <Button color="primary" onClick={this.props.startCreating}>create</Button>
-          <Button color="primary" onClick={this.props.editOntology}>edit ontology</Button>
+          <Button color="primary" onClick={this.props.editOntology}>edit schema</Button>
         </Panel>
 
         {maybeCreateModal}
