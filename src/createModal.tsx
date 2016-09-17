@@ -6,6 +6,8 @@ import { Modal } from "./modal";
 import { connect } from "react-redux";
 import { setCreatingTodo, submitTodo } from "./actions";
 
+import { Button, Input } from "muicss/react";
+
 const actionCreators: IActionProps = {
   submitTodo,
   closeModal: () => setCreatingTodo(false),
@@ -35,21 +37,21 @@ export class CreateModal extends React.Component<IDispatchProps & IActionProps, 
 
   render() {
     if (!this.props.shouldShow) {
-      return null;  
+      return null;
     }
 
     return (
       <Modal>
-        <button onClick={this.props.closeModal}>close</button>
+        <Button onClick={this.props.closeModal}>close</Button>
 
         <br />
 
         <form onSubmit={this.handleSubmit}>
-          <input type="text" className="todoInput" placeholder="todo" />
+          <Input type="text" className="todoInput" placeholder="todo" />
 
           {this.renderFacetInputs()}
 
-          <input type="submit" />
+          <Button type="submit" className="mui--pull-right">submit</Button>
         </form>
 
         {this.renderErrors()}
@@ -83,7 +85,7 @@ export class CreateModal extends React.Component<IDispatchProps & IActionProps, 
   private handleSubmit = (e: any) => {
     e.nativeEvent.preventDefault();
 
-    const todoName: string = e.nativeEvent.target.querySelector(".todoInput").value;
+    const todoName: string = e.nativeEvent.target.querySelector(".todoInput input").value;
     this.props.submitTodo({
       name: todoName,
       id: Math.random(),

@@ -13,8 +13,6 @@ import { overlay } from "muicss";
 
 export interface IAppProps {
   todosCount?: number;
-  isCreating?: boolean;
-  isOntologyEditorOpen: boolean;
   startCreating?: any;
   editOntology?: any;
 };
@@ -27,26 +25,20 @@ const actionCreators = {
 @connect(selectProps, actionCreators)
 export class App extends React.Component<IAppProps, {}> {
   render() {
-    let maybeCreateModal = this.props.isCreating ? <CreateModal /> : null;
-    let maybeOntologyModal = this.props.isOntologyEditorOpen ? <OntologyModal /> : null;
-
     return (
       <div>
         <Appbar></Appbar>
         <Container>
-        <Panel>
-          <h1>{this.props.todosCount} todos</h1>
-        </Panel>
+          <Panel>
+            <h1>{this.props.todosCount} todos</h1>
+          </Panel>
 
-        <TodoList />
+          <TodoList />
 
-        <Panel>
-          <Button color="primary" onClick={this.props.startCreating}>create</Button>
-          <Button color="primary" onClick={this.props.editOntology}>edit schema</Button>
-        </Panel>
-
-        {maybeCreateModal}
-        {maybeOntologyModal}
+          <Panel>
+            <Button color="primary" onClick={this.props.startCreating}>create</Button>
+            <Button color="primary" onClick={this.props.editOntology}>edit schema</Button>
+          </Panel>
         </Container>
       </div>
     );
@@ -56,8 +48,6 @@ export class App extends React.Component<IAppProps, {}> {
 function selectProps(state: IState): IAppProps {
   return {
     todosCount: state.todos.todos.length,
-    isCreating: state.isCreating,
-    isOntologyEditorOpen: state.ontology.isEditing,
   }
 }
 

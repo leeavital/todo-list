@@ -13,7 +13,11 @@ declare namespace muireact {
   }
 
   class Panel {
-  
+
+  }
+
+  class Input {
+
   }
 }
 
