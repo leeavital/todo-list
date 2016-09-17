@@ -17,7 +17,12 @@ export interface IOpenEditor {
   open: boolean;
 }
 
-export type IOntologyAction = ISubmitFacet | IOpenEditor;
+export interface IRemoveFacet {
+  type: "ontology::removeFacet";
+  id: number;
+}
+
+export type IOntologyAction = ISubmitFacet | IOpenEditor | IRemoveFacet;
 
 export function ontologyReducer(state: IOntologyState = initialState, action: IOntologyAction): IOntologyState {
   switch (action.type) {
@@ -25,6 +30,8 @@ export function ontologyReducer(state: IOntologyState = initialState, action: IO
       return IOntologyState.addFacet(state, action.facet);
     case "ontology::openEditor":
       return IOntologyState.setOpen(state, action.open);
+    case "ontology::removeFacet":
+      return IOntologyState.removeFacetById(state, action.id);
     default:
       return state;
   }

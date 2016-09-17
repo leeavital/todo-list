@@ -14,3 +14,10 @@ export function openOntologyEditor(open: boolean): IOntologyAction {
     open
   }
 }
+
+export function removeFacet(id: number): IOntologyAction {
+  return {
+    type: "ontology::removeFacet",
+    id
+  };
+};

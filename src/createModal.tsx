@@ -1,8 +1,9 @@
 import * as React from "react";
 import { IState } from "./reducer";
+import { ITodo } from "./todosReducer";
+import { Modal } from "./modal";
 import { connect } from "react-redux";
 import { setCreatingTodo, submitTodo } from "./actions";
-import { ITodo } from "./todosReducer";
 
 const actionCreators: IDispatchProps = {
   submitTodo,
@@ -23,20 +24,9 @@ type ICreateModalProps = IDispatchProps;
 @connect(selectProps, actionCreators)
 export class CreateModal extends React.Component<ICreateModalProps, {}> {
 
-  private ref: HTMLElement;
-
-  private style = {
-    position: "absolute",
-    margin: "40px",
-    width: "calc(100% - 80px)",
-    height: "calc(100% - 80px)",
-    backgroundColor: "gray",
-    top: 0,
-  };
-
   render() {
     return (
-      <div style={this.style} >
+      <Modal>
         <button onClick={this.props.closeModal}>close</button>
         Create Modal
 
@@ -45,7 +35,7 @@ export class CreateModal extends React.Component<ICreateModalProps, {}> {
 
           <input type="submit" />
         </form>
-      </div>
+      </Modal>
     );
   }
 

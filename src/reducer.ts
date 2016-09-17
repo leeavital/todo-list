@@ -2,10 +2,13 @@ import { combineReducers } from 'redux';
 
 import { todosReducer, ITodosState } from "./todosReducer"
 import { IAction, submitTodo } from "./actions";
+import { ontologyReducer } from "./ontologyReducer";
+import { IOntologyState } from "./ontology";
 
 export interface IState {
   todos: ITodosState;
   isCreating: boolean;
+  ontology: IOntologyState;
 }
 
 const initialState: IState = {
@@ -13,6 +16,7 @@ const initialState: IState = {
     todos: [],
   },
   isCreating: false,
+  ontology: null, //TODO
 }
 
 function creatingReducer(state: boolean = false, action: IAction): boolean {
@@ -51,6 +55,7 @@ export const reduce = foldTop(
     combineReducers({
       todos: todosReducer,
       isCreating: creatingReducer,
+      ontology: ontologyReducer
     }),
     submitTodoReducer
   );
