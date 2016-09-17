@@ -6,34 +6,38 @@ import { Modal } from "./modal";
 import { connect } from "react-redux";
 import { setCreatingTodo, submitTodo } from "./actions";
 
-const actionCreators: IDispatchProps = {
+const actionCreators: IActionProps = {
   submitTodo,
   closeModal: () => setCreatingTodo(false),
 };
 
-function selectProps(state: IState) {
+function selectProps(state: IState): IDispatchProps {
   return {
-    facets: state.ontology.facets
+    facets: state.ontology.facets,
+    errors: state.todos.createErrors,
   };
 }
 
 interface IDispatchProps {
-  closeModal: (() => void);
-  submitTodo: ((todo: ITodo) => void);
+  facets: IFacet[];
+  errors: string[];
 }
 
 interface IActionProps {
-  facets: IFacet[];
+  closeModal: (() => void);
+  submitTodo: ((todo: ITodo) => void);
 }
 
 @connect(selectProps, actionCreators)
 export class CreateModal extends React.Component<IDispatchProps & IActionProps, {}> {
 
   render() {
+    console.log(this.props);
     return (
       <Modal>
         <button onClick={this.props.closeModal}>close</button>
-        Create Modal
+
+        <br />
 
         <form onSubmit={this.handleSubmit}>
           <input type="text" className="todoInput" placeholder="todo" />
@@ -42,6 +46,8 @@ export class CreateModal extends React.Component<IDispatchProps & IActionProps, 
 
           <input type="submit" />
         </form>
+
+        {this.renderErrors()}
       </Modal>
     );
   }
@@ -59,6 +65,14 @@ export class CreateModal extends React.Component<IDispatchProps & IActionProps, 
     });
 
     return (<ul>{is}</ul>);
+  }
+
+  private renderErrors() {
+    const errors = this.props.errors.map(err => {
+      return <li key={err}>{err}</li>
+    });
+
+    return (<ul>{errors}</ul>);
   }
 
   private handleSubmit = (e: any) => {

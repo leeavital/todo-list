@@ -8,10 +8,15 @@ export interface ITodo {
 
 export interface ITodosState {
   todos: ITodo[];
+  /**
+   * The last createErrors
+   */
+  createErrors: string[];
 }
 
 const initialTodos: ITodosState = {
-  todos: []
+  todos: [],
+  createErrors: []
 };
 
 export function todosReducer(state: ITodosState = initialTodos, action: IAction) {
