@@ -7,7 +7,11 @@ import { createStore } from "redux";
 import { reduce } from "./reducer";
 
 let store = createStore( reduce, (window as any).devToolsExtension && (window as any).devToolsExtension() );
-store.dispatch( addTodo("hello world") );
+store.dispatch( addTodo({
+  name: "hello",
+  id: Math.random(),
+  metadata: {}
+}));
 
 console.log( store.getState() );
 

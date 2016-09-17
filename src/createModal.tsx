@@ -2,6 +2,7 @@ import * as React from "react";
 import { IState } from "./reducer";
 import { connect } from "react-redux";
 import { setCreatingTodo, submitTodo } from "./actions";
+import { ITodo } from "./todosReducer";
 
 const actionCreators: IDispatchProps = {
   submitTodo,
@@ -14,7 +15,7 @@ function selectProps(state: IState) {
 
 interface IDispatchProps {
   closeModal: (() => void);
-  submitTodo: ((todo: string) => void);
+  submitTodo: ((todo: ITodo) => void);
 }
 
 type ICreateModalProps = IDispatchProps;
@@ -23,7 +24,7 @@ type ICreateModalProps = IDispatchProps;
 export class CreateModal extends React.Component<ICreateModalProps, {}> {
 
   private ref: HTMLElement;
-  
+
   private style = {
     position: "absolute",
     margin: "40px",
@@ -38,7 +39,7 @@ export class CreateModal extends React.Component<ICreateModalProps, {}> {
       <div style={this.style} >
         <button onClick={this.props.closeModal}>close</button>
         Create Modal
-        
+
         <form onSubmit={this.handleSubmit}>
           <input type="text" className="todoInput" placeholder="todo" />
 
@@ -51,7 +52,11 @@ export class CreateModal extends React.Component<ICreateModalProps, {}> {
   private handleSubmit = (e: any) => {
     e.nativeEvent.preventDefault();
 
-    const todoName = e.nativeEvent.target.querySelector(".todoInput").value;
-    this.props.submitTodo(todoName);
+    const todoName: string = e.nativeEvent.target.querySelector(".todoInput").value;
+    this.props.submitTodo({
+      name: todoName,
+      id: Math.random(),
+      metadata: {}
+    });
   }
 }
