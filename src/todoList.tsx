@@ -3,6 +3,7 @@ import { IState } from "./reducer";
 import { connect } from "react-redux";
 import { ITodo } from "./todosReducer";
 import { removeTodo } from "./actions";
+import { Panel, Button } from "muicss/react";
 
 interface ITodosListDispatchProps {
   todos: ITodo[];
@@ -30,13 +31,14 @@ export class TodoList extends React.Component<ITodosListProps, any> {
   render() {
     let items = this.props.todos.map(todo => {
         let remove = () => this.props.removeTodo(todo.id);
-        return (<li key={todo.id}>
+        return (<Panel key={todo.id}>
           {todo.name}
-          <button onClick={remove}>remove</button>
-        </li>);
+          <br />
+          <Button color="danger" onClick={remove}>remove</Button>
+        </Panel>);
     });
 
-    return (<ul>{items}</ul>);
+    return (<div>{items}</div>);
   }
 }
 

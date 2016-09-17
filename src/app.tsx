@@ -1,4 +1,6 @@
 import * as React from "react";
+import { Appbar, Button, Container, Panel } from 'muicss/react';
+
 import { IState } from "./reducer";
 import { addTodo, setCreatingTodo } from "./actions";
 import { connect } from "react-redux";
@@ -23,22 +25,27 @@ const actionCreators = {
 @connect(selectProps, actionCreators)
 export class App extends React.Component<IAppProps, {}> {
   render() {
-    console.log(this.props);
-
     let maybeCreateModal = this.props.isCreating ? <CreateModal /> : null;
     let maybeOntologyModal = this.props.isOntologyEditorOpen ? <OntologyModal /> : null;
 
     return (
       <div>
-        <h1>{this.props.todosCount} todos</h1>
+        <Appbar></Appbar>
+        <Container>
+        <Panel>
+          <h1>{this.props.todosCount} todos</h1>
+        </Panel>
 
         <TodoList />
 
-        <button onClick={this.props.startCreating}>create</button>
-        <button onClick={this.props.editOntology}>edit ontology</button>
+        <Panel>
+          <Button color="primary" onClick={this.props.startCreating}>create</Button>
+          <Button color="primary" onClick={this.props.editOntology}>edit ontology</Button>
+        </Panel>
 
         {maybeCreateModal}
         {maybeOntologyModal}
+        </Container>
       </div>
     );
   }
