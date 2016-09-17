@@ -45,7 +45,7 @@ function foldTop(...fns: any[]) {
   return function(state, action) {
     let nextState = state;
     for (let fn of fns) {
-      nextState = fn(nextState, action); 
+      nextState = fn(nextState, action);
     }
     return nextState;
   }
@@ -55,7 +55,7 @@ export const reduce = foldTop(
     combineReducers({
       todos: todosReducer,
       isCreating: creatingReducer,
-      ontology: ontologyReducer
+      ontology: ontologyReducer,
     }),
     submitTodoReducer
   );
