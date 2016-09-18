@@ -4,10 +4,10 @@ import { shallowCopy } from "./shallowCopy";
 
 export function submitTodoReducer(state: IState = initialState, action: IAction) {
   switch(action.type) {
-    case "submitTodo":
+    case "top::submitTodo":
       let copy = shallowCopy(state);
       copy.todos = shallowCopy(copy.todos);
-      
+
       let errors = [];
       if (action.todo.name == null || action.todo.name === "") {
         //TODO: check facets

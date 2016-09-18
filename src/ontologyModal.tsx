@@ -5,6 +5,8 @@ import { Modal } from "./modal";
 import { submitFacet, removeFacet, openOntologyEditor } from "./ontologyActions";
 import { IFacet} from "./ontology";
 
+import { Button, Input } from "muicss/react";
+
 interface IOntologyModalDispatchProps {
   facets: IFacet[];
   shouldShow: boolean;
@@ -46,15 +48,15 @@ export class OntologyModal extends React.Component<IOntologyModalDispatchProps &
 
     return (
       <Modal>
-        <button onClick={this.props.closeEditor}>close</button>
+        <Button onClick={this.props.closeEditor}>close</Button>
         <ul>
           {items}
         </ul>
 
         <form onSubmit={this.handleSubmit}>
-          <input type="name" placeholder="name" />
+          <Input type="name" hint="name" />
 
-          <button type="submit">submit</button>
+          <Button type="submit">submit</Button>
         </form>
       </Modal>
     );

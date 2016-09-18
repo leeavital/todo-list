@@ -47,7 +47,7 @@ export class CreateModal extends React.Component<IDispatchProps & IActionProps, 
         <br />
 
         <form onSubmit={this.handleSubmit}>
-          <Input type="text" className="todoInput" placeholder="todo" />
+          <Input type="text" className="todoInput" hint="todo" />
 
           {this.renderFacetInputs()}
 
@@ -63,10 +63,7 @@ export class CreateModal extends React.Component<IDispatchProps & IActionProps, 
     let is = this.props.facets.map(facet => {
       return (
         <div key={facet.id}>
-          <label data-facet-name={facet.name}>
-            {facet.name}
-            <input className="facet-input" data-facet-id={facet.id} type="text" placeholder={facet.name} />
-          </label>
+          <Input className="facet-input" data-facet-id={facet.id} type="text" hint={facet.name} />
         </div>
       );
     });

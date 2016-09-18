@@ -5,7 +5,7 @@ export class Modal extends React.Component<{}, {}> {
 
   private style = {
     width: '400px',
-    height: '300px',
+    minHeight: '300px',
     margin: '100px auto',
     backgroundColor: '#fff',
   };

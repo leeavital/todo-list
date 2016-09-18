@@ -21,11 +21,11 @@ const initialTodos: ITodosState = {
 
 export function todosReducer(state: ITodosState = initialTodos, action: IAction) {
   switch (action.type) {
-    case "addTodo":
+    case "todos::addTodo":
       const todos = state.todos.concat(action.todo);
       return Object.assign({}, state, {todos});
 
-    case "removeTodo":
+    case "todos::removeTodo":
       const { id } = action;
       const newTodos = state.todos.filter(todo => todo.id !== id);
       return Object.assign({}, state, {todos: newTodos});

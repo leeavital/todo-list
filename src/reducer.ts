@@ -5,6 +5,7 @@ import { IAction, submitTodo } from "./actions";
 import { ontologyReducer } from "./ontologyReducer";
 import { IOntologyState } from "./ontology";
 import { submitTodoReducer } from "./submitReducer";
+import { loadStateReducer } from "./loadStateReducer";
 
 export interface IState {
   todos: ITodosState;
@@ -23,7 +24,7 @@ export const initialState: IState = {
 
 function creatingReducer(state: boolean = false, action: IAction): boolean {
   switch (action.type) {
-    case "creatingTodo":
+    case "todos::creatingTodo":
       return action.open;
     default:
       return state;
@@ -46,5 +47,6 @@ export const reduce = foldTop(
       isCreating: creatingReducer,
       ontology: ontologyReducer,
     }),
-    submitTodoReducer
+    submitTodoReducer,
+    loadStateReducer,
   );

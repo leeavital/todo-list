@@ -26,7 +26,9 @@ declare module "muicss/react" {
 }
 
 declare namespace mui {
-  function overlay(offOn: "off" | "on", el?: any): void
+  function overlay(offOn: "off" | "on", el?: any, opts?: {
+    keyboard?: boolean
+  }): void
 }
 
 declare module "muicss" {
