@@ -21,7 +21,7 @@ export function submitTodoReducer(state: IState = initialState, action: IAction)
 
       // past this point, input is okay and we can change the state
       copy.todos.todos = copy.todos.todos.concat(action.todo);
-      copy.isCreating = false;
+      copy.todos.isCreating = false;
       copy.todos.createErrors = [];
       return copy;
 

@@ -1,22 +1,27 @@
 import { IAction } from "./actions";
+import { shallowCopy } from "./shallowCopy";
 
 export interface ITodo {
   id: number;
   name: string;
-  metadata: {[key: string]: string};
+  metadata: {[facetId: number]: string};
 }
 
 export interface ITodosState {
   todos: ITodo[];
+
   /**
    * The last createErrors
    */
   createErrors: string[];
+
+  isCreating: boolean;
 }
 
 const initialTodos: ITodosState = {
   todos: [],
-  createErrors: []
+  createErrors: [],
+  isCreating: false,
 };
 
 export function todosReducer(state: ITodosState = initialTodos, action: IAction) {
@@ -29,6 +34,11 @@ export function todosReducer(state: ITodosState = initialTodos, action: IAction)
       const { id } = action;
       const newTodos = state.todos.filter(todo => todo.id !== id);
       return Object.assign({}, state, {todos: newTodos});
+
+    case "todos::creatingTodo":
+      let copy = shallowCopy(state);
+      copy.isCreating = action.open;
+      return copy;
     default:
       return state;
   }

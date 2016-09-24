@@ -1,11 +1,10 @@
 import * as React from "react";
-import { connect } from "react-redux";
+import { Button, Input, Panel } from "muicss/react";
+import { IFacet} from "./ontology";
 import { IState } from "./reducer";
 import { Modal } from "./modal";
+import { connect } from "react-redux";
 import { submitFacet, removeFacet, openOntologyEditor } from "./ontologyActions";
-import { IFacet} from "./ontology";
-
-import { Button, Input } from "muicss/react";
 
 interface IOntologyModalDispatchProps {
   facets: IFacet[];
@@ -41,20 +40,22 @@ export class OntologyModal extends React.Component<IOntologyModalDispatchProps &
     }
 
     let items = this.props.facets.map(fac => {
-        return (<li key={fac.id}>
-          {fac.name} <button onClick={() => this.props.removeFacet(fac.id)}>remove</button>
-        </li>);
+        return (<Panel key={fac.id}>
+          {fac.name}
+          <br />
+          <Button color="danger" onClick={() => this.props.removeFacet(fac.id)}>remove</Button>
+        </Panel>);
     });
 
     return (
       <Modal>
         <Button onClick={this.props.closeEditor}>close</Button>
-        <ul>
+        <div>
           {items}
-        </ul>
+        </div>
 
         <form onSubmit={this.handleSubmit}>
-          <Input type="name" hint="name" />
+          <Input type="text" hint="name" />
 
           <Button type="submit">submit</Button>
         </form>

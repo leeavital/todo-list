@@ -13,9 +13,6 @@ import { overlay } from "muicss";
 
 let store = createStore( reduce, (window as any).devToolsExtension && (window as any).devToolsExtension() );
 
-let state = JSON.parse((window as any).localStorage.getItem("todoState"));
-store.dispatch(loadState(state as IState));
-
 const app = document.createElement("div");
 app.id = "app-container";
 document.body.appendChild(app);
@@ -37,8 +34,8 @@ ReactDOM.render(
   </Provider>, modal);
 
 store.subscribe(() => {
-  let state = store.getState();
-  if (state.isCreating || state.ontology.isEditing) {
+  let state: IState = store.getState();
+  if (state.todos.isCreating || state.ontology.isEditing) {
     overlay("on", modal, {keyboard: false});
   } else {
     overlay("off", modal);  
@@ -48,3 +45,7 @@ store.subscribe(() => {
   (window as any).localStorage.setItem("todoState", JSON.stringify(state));
 });
 
+
+// load any initial state from localStorage
+let state = JSON.parse((window as any).localStorage.getItem("todoState"));
+store.dispatch(loadState(state as IState));

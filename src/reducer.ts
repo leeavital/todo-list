@@ -9,26 +9,16 @@ import { loadStateReducer } from "./loadStateReducer";
 
 export interface IState {
   todos: ITodosState;
-  isCreating: boolean;
   ontology: IOntologyState;
 }
 
 export const initialState: IState = {
   todos: {
     todos: [],
-    createErrors: []
+    createErrors: [],
+    isCreating: false,
   },
-  isCreating: false,
   ontology: null, //TODO
-}
-
-function creatingReducer(state: boolean = false, action: IAction): boolean {
-  switch (action.type) {
-    case "todos::creatingTodo":
-      return action.open;
-    default:
-      return state;
-  }
 }
 
 function foldTop(...fns: any[]) {
@@ -44,7 +34,6 @@ function foldTop(...fns: any[]) {
 export const reduce = foldTop(
     combineReducers({
       todos: todosReducer,
-      isCreating: creatingReducer,
       ontology: ontologyReducer,
     }),
     submitTodoReducer,

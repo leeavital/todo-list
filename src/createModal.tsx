@@ -17,7 +17,7 @@ function selectProps(state: IState): IDispatchProps {
   return {
     facets: state.ontology.facets,
     errors: state.todos.createErrors,
-    shouldShow: state.isCreating,
+    shouldShow: state.todos.isCreating,
   };
 }
 
